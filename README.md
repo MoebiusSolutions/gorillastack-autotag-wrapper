@@ -99,11 +99,11 @@ Run the docker image (via Podman):
 
 From inside the container, you can build/deploy the auto-run NodeJS code to your S3 bucket:
 
-    /build-and-deploy-code.sh <s3-bucket-name> <s3-file-path>
+    /opt/gorillastack-autotag-wrapper/build-and-deploy-code.sh <s3-bucket-name> <s3-file-path>
 
 ... for example:
 
-    /build-and-deploy-code.sh my-autotag-bucket autotag.zip
+    /opt/gorillastack-autotag-wrapper/build-and-deploy-code.sh my-autotag-bucket autotag.zip
 
 From inside the container, you can deploy the CloudFormation template with:
 

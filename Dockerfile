@@ -15,9 +15,8 @@ ADD --chown=root:root cacerts.placeholder cacerts.pe[m] /opt/gorillastack-autota
 RUN set -x && \
     if [ -f /opt/gorillastack-autotag-wrapper/cacerts.pem ]; then \
         # Add the cacerts where they will be loaded by update-ca-certificates, when it is installed
-        install -o root -g root -m 0755 -d /etc/ssl/; \
-        install -o root -g root -m 0755 -d /etc/ssl/certs/; \
-        cat /opt/gorillastack-autotag-wrapper/cacerts.pem >> /etc/ssl/certs/injected-cacerts.crt; \
+        install -o root -g root -m 0755 -d /usr/local/share/ca-certificates/; \
+        install -o root -g root -m 0755 /opt/gorillastack-autotag-wrapper/cacerts.pem /usr/local/share/ca-certificates/injected-cacerts.crt; \
     fi
 
 RUN set -x && \
@@ -71,8 +70,8 @@ RUN set -x && \
     sed -i "s/err.code === 'NoSuchTagSet' && err.statusCode === 404/err.Code === 'NoSuchTagSet'/g" \
          /opt/auto-tag/src/workers/autotag_s3_worker.js
 
-ADD build-and-deploy-code.sh /build-and-deploy-code.sh
+ADD build-and-deploy-code.sh /opt/gorillastack-autotag-wrapper/build-and-deploy-code.sh
 RUN set -x && \
-    chmod 0755 /build-and-deploy-code.sh
+    chmod 0755 /opt/gorillastack-autotag-wrapper/build-and-deploy-code.sh
 
 
